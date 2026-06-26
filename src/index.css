@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-navy-950 text-paper/80 font-sans antialiased;
+    /* fixed deep-blue backdrop so every section sits on the brand primary */
+    background-color: #081726;
+    background-image:
+      radial-gradient(60rem 40rem at 85% -10%, rgba(47, 142, 203, 0.12), transparent 60%),
+      radial-gradient(50rem 40rem at 0% 30%, rgba(79, 141, 58, 0.10), transparent 60%);
+    background-attachment: fixed;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: #df8326;
+    color: #fff;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight text-paper-soft;
+    text-wrap: balance;
+  }
+
+  /* Visible focus rings for keyboard users */
+  :focus-visible {
+    outline: 3px solid #2f8ecb;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-moss-light;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold
+           transition-[background-color,color,box-shadow,transform] duration-200 cursor-pointer
+           focus-visible:outline-offset-4;
+  }
+  .btn-primary {
+    @apply btn bg-moss text-white hover:bg-moss-light shadow-soft hover:shadow-lift;
+  }
+  .btn-ember {
+    @apply btn bg-ember text-navy-950 hover:bg-ember-light shadow-soft;
+  }
+  .btn-ghost {
+    @apply btn border border-white/20 bg-white/5 text-paper-soft hover:border-white/40 hover:bg-white/10;
+  }
+
+  /* Dark-glass card — the default surface across the now blue site */
+  .card {
+    @apply rounded-3xl border border-white/10 bg-white/[0.04] shadow-soft backdrop-blur-sm;
+  }
+
+  /* Section gradient bands — alternated to differentiate sections as you scroll */
+  .sx-a { @apply bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950; }
+  .sx-b { @apply bg-gradient-to-b from-navy-900 via-navy-950 to-navy-900; }
+  .sx-deep { @apply bg-gradient-to-br from-navy-800 via-navy-900 to-navy-950; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Marquee track is doubled, so translate -50% loops seamlessly */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+/* Gentle pause when a visitor hovers to read */
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .marquee-track { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
