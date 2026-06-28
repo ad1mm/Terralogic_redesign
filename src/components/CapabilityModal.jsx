@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import ServerRack from './ServerRack.jsx'
+import CapabilityArt from './CapabilityArt.jsx'
 import { IconClose, IconArrowUpRight } from './Icons.jsx'
 
 /**
  * Detail dialog for a single capability. Two-column layout: depth + feature list
- * on the left, an animated server-rack brand motif on the right.
+ * on the left, a per-capability animated illustration on the right.
  * Accessible — role="dialog", Escape to close, backdrop click, focus moves to the
  * close button on open, and body scroll is locked while open.
  */
@@ -102,7 +102,7 @@ export default function CapabilityModal({ item, onClose }) {
           </div>
 
           {/* Right: animated server-rack brand motif + managed-infra stats */}
-          <div className="relative flex flex-col items-center justify-center gap-6 overflow-hidden bg-gradient-to-br from-navy-800/70 via-navy-900 to-navy-950 p-6 sm:p-8">
+          <div className="relative flex flex-col items-center justify-center gap-6 overflow-hidden bg-gradient-to-br from-navy-800/70 via-navy-900 to-navy-950 p-6 sm:p-8 lg:items-start lg:pl-4">
             {/* faint blueprint grid */}
             <div
               className="pointer-events-none absolute inset-0 opacity-[0.05]"
@@ -119,9 +119,9 @@ export default function CapabilityModal({ item, onClose }) {
             {/* blend the panel into the left column to soften the split */}
             <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-navy-900 to-transparent" aria-hidden="true" />
 
-            <ServerRack className="relative h-64 w-auto drop-shadow-[0_10px_34px_rgba(86,166,218,0.18)] sm:h-72" />
+            <CapabilityArt kind={current.icon} className="relative h-64 w-auto drop-shadow-[0_10px_34px_rgba(86,166,218,0.18)] sm:h-72" />
 
-            <ul className="relative grid w-full max-w-xs grid-cols-3 gap-2 text-center">
+            <ul className="relative grid w-full max-w-[15rem] grid-cols-3 gap-2 text-center">
               {[
                 { v: '99.98%', l: 'Uptime' },
                 { v: '24/7', l: 'Managed' },

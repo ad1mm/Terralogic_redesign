@@ -129,6 +129,16 @@
 .rack-led { animation: rackLed 2.6s ease-in-out infinite; }
 .rack-scan { animation: rackScan 6.5s ease-in-out infinite; }
 
+/* Shared "data flow" sweep for the capability illustrations — a dot or bar
+   travels by a per-element distance (--fx / --fy) and fades at each end */
+@keyframes artFlow {
+  0% { transform: translate(0, 0); opacity: 0; }
+  18% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { transform: translate(var(--fx, 0px), var(--fy, 60px)); opacity: 0; }
+}
+.art-flow { animation: artFlow 2.8s linear infinite; }
+
 /* Thin, themed scrollbar for the capability modal (the default OS bar crossing
    the modal's rounded corners reads as broken on taller cards) */
 .modal-scroll {
@@ -159,9 +169,10 @@
     transition: none !important;
   }
   .marquee-track { animation: none !important; }
-  /* Freeze the rack motif: LEDs stay softly lit, the scan hides */
+  /* Freeze the illustration motifs: LEDs stay softly lit, sweeps hide */
   .rack-led { animation: none !important; opacity: 0.8 !important; }
   .rack-scan { animation: none !important; display: none !important; }
+  .art-flow { animation: none !important; opacity: 0 !important; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
