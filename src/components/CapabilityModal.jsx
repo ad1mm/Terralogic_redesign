@@ -75,7 +75,7 @@ export default function CapabilityModal({ item, onClose }) {
           <IconClose width={18} height={18} />
         </button>
 
-        <div className="grid gap-0 lg:grid-cols-2">
+        <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
           {/* Left: depth + features */}
           <div className="p-6 sm:p-8">
             <h2 id="capability-modal-title" className="font-display text-2xl font-bold leading-tight text-paper-soft sm:text-[1.7rem]">
@@ -102,7 +102,7 @@ export default function CapabilityModal({ item, onClose }) {
           </div>
 
           {/* Right: animated server-rack brand motif + managed-infra stats */}
-          <div className="relative flex flex-col items-center justify-center gap-6 overflow-hidden bg-gradient-to-br from-navy-800/70 via-navy-900 to-navy-950 p-6 sm:p-8 lg:items-start lg:pl-4">
+          <div className="relative flex flex-col items-center justify-center gap-6 overflow-hidden bg-gradient-to-br from-navy-800/70 via-navy-900 to-navy-950 p-6 sm:p-8">
             {/* faint blueprint grid */}
             <div
               className="pointer-events-none absolute inset-0 opacity-[0.05]"
@@ -119,9 +119,9 @@ export default function CapabilityModal({ item, onClose }) {
             {/* blend the panel into the left column to soften the split */}
             <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-navy-900 to-transparent" aria-hidden="true" />
 
-            <CapabilityArt kind={current.icon} className="relative h-64 w-auto drop-shadow-[0_10px_34px_rgba(86,166,218,0.18)] sm:h-72" />
+            <CapabilityArt kind={current.icon} className="relative h-72 w-auto drop-shadow-[0_10px_34px_rgba(86,166,218,0.18)] sm:h-80" />
 
-            <ul className="relative grid w-full max-w-[15rem] grid-cols-3 gap-2 text-center">
+            <ul className="relative grid w-full max-w-xs grid-cols-3 gap-2 text-center">
               {[
                 { v: '99.98%', l: 'Uptime' },
                 { v: '24/7', l: 'Managed' },

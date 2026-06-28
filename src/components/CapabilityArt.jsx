@@ -119,26 +119,27 @@ function CloudArt() {
 
 /* 3. Cybersecurity & Surveillance — shield with scan + keyhole + viewfinder */
 function ShieldArt() {
-  const pts = '72,60 148,60 148,104 110,150 72,104'
+  // curved shield: rounded top corners, sides bowing in to a rounded point
+  const shield = 'M76 60 H144 Q150 60 150 66 V100 Q150 134 110 152 Q70 134 70 100 V66 Q70 60 76 60 Z'
   const Corner = ({ x, y, sx, sy }) => (
     <path d={`M${x + sx * 10} ${y} H${x} V${y + sy * 10}`} fill="none" stroke={S.soft} strokeWidth="2" strokeLinecap="round" />
   )
   return (
     <>
-      <Corner x={52} y={50} sx={1} sy={1} />
-      <Corner x={168} y={50} sx={-1} sy={1} />
-      <Corner x={52} y={160} sx={1} sy={-1} />
-      <Corner x={168} y={160} sx={-1} sy={-1} />
-      <polygon points={pts} fill={S.fill} stroke={S.stroke} />
+      <Corner x={50} y={50} sx={1} sy={1} />
+      <Corner x={170} y={50} sx={-1} sy={1} />
+      <Corner x={50} y={162} sx={1} sy={-1} />
+      <Corner x={170} y={162} sx={-1} sy={-1} />
+      <path d={shield} fill={S.fill} stroke={S.stroke} />
       <clipPath id="shieldClip">
-        <polygon points={pts} />
+        <path d={shield} />
       </clipPath>
       <g clipPath="url(#shieldClip)">
-        <rect className="art-flow" x="72" y="58" width="76" height="3" fill="url(#artScanGrad)" style={{ '--fy': '86px', animationDuration: '4.5s' }} />
+        <rect className="art-flow" x="70" y="58" width="80" height="3" fill="url(#artScanGrad)" style={{ '--fy': '92px', animationDuration: '4.5s' }} />
       </g>
-      <circle cx="110" cy="96" r="7" fill="none" stroke={S.stroke} />
-      <rect x="108" y="100" width="4" height="12" rx="2" fill={LED.ember} opacity="0.8" />
-      <Led cx="110" cy="96" color="ember" r="3" i={0} />
+      <circle cx="110" cy="98" r="7" fill="none" stroke={S.stroke} />
+      <rect x="108" y="102" width="4" height="12" rx="2" fill={LED.ember} opacity="0.8" />
+      <Led cx="110" cy="98" color="ember" r="3" i={0} />
     </>
   )
 }
