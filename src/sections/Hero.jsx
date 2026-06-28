@@ -62,9 +62,9 @@ export default function Hero() {
           <div className="reveal is-visible max-w-xl">
             <h1 className="font-display text-[2.5rem] font-bold leading-[1.04] tracking-tight text-paper-soft sm:text-5xl lg:text-[3.65rem]">
               {hero.titleA}{' '}
-              <span className="relative whitespace-nowrap text-moss-light">
+              <span className="relative whitespace-normal text-moss-light sm:whitespace-nowrap">
                 {hero.titleHighlight}
-                <svg className="absolute -bottom-1 left-0 w-full" height="10" viewBox="0 0 300 10" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                <svg className="absolute -bottom-1 left-0 hidden w-full sm:block" height="10" viewBox="0 0 300 10" fill="none" preserveAspectRatio="none" aria-hidden="true">
                   <path d="M2 7c70-6 226-6 296 0" stroke="#df8326" strokeWidth="3" strokeLinecap="round" />
                 </svg>
               </span>{' '}

@@ -10,6 +10,9 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* guard against any element bleeding past the viewport on small screens
+       (clip, not hidden, so position: sticky keeps working) */
+    overflow-x: clip;
   }
 
   body {
