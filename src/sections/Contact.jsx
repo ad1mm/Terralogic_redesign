@@ -21,13 +21,13 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="sx-b scroll-mt-24 py-20 sm:py-28">
+    <section id="contact" className="sx-b scroll-mt-24 overflow-x-clip py-20 sm:py-28">
       <div className="container-x">
         <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] px-5 py-12 shadow-soft backdrop-blur-sm sm:px-10 sm:py-14">
           {/* oversized backdrop word */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -right-4 -top-6 select-none font-display text-[26vw] font-bold leading-none tracking-tighter text-white/[0.04] sm:text-[16rem]"
+            className="pointer-events-none absolute right-0 top-0 select-none font-display text-[22vw] font-bold leading-none tracking-tighter text-white/[0.04] sm:-right-4 sm:-top-6 sm:text-[16rem]"
           >
             Contact
           </span>
@@ -49,25 +49,27 @@ export default function Contact() {
               <ul className="mt-9 space-y-3">
                 {details.map(({ icon: Ico, label, value, href }) => {
                   const inner = (
-                    <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors duration-200 group-hover:border-moss/40">
+                    <div className="flex min-w-0 items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors duration-200 group-hover:border-moss/40">
                       <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/5 text-paper-soft">
                         <Ico width={20} height={20} />
                       </span>
-                      <span className="min-w-0">
+                      <span className="min-w-0 flex-1">
                         <span className="block text-xs font-semibold uppercase tracking-wider text-paper/50">{label}</span>
-                        <span className="block truncate font-medium text-paper-soft">{value}</span>
+                        <span className="block break-words font-medium text-paper-soft">{value}</span>
                       </span>
-                      {href && <IconArrowUpRight width={18} height={18} className="ml-auto text-paper/30" />}
+                      {href && (
+                        <IconArrowUpRight width={18} height={18} className="mt-0.5 shrink-0 text-paper/30" />
+                      )}
                     </div>
                   )
                   return (
-                    <li key={label}>
+                    <li key={label} className="min-w-0">
                       {href ? (
-                        <a href={href} className="group block">
+                        <a href={href} className="group block min-w-0">
                           {inner}
                         </a>
                       ) : (
-                        <div className="group">{inner}</div>
+                        <div className="group min-w-0">{inner}</div>
                       )}
                     </li>
                   )
