@@ -101,8 +101,9 @@ export default function CapabilityModal({ item, onClose }) {
             </a>
           </div>
 
-          {/* Right: animated server-rack brand motif + managed-infra stats */}
-          <div className="relative flex flex-col items-center justify-center gap-6 overflow-hidden bg-gradient-to-br from-navy-800/70 via-navy-900 to-navy-950 p-6 sm:p-8">
+          {/* Right: per-capability illustration + managed-infra stats.
+              Hidden on smaller screens — the modal goes text-only there. */}
+          <div className="relative hidden flex-col items-center justify-center gap-6 overflow-hidden bg-gradient-to-br from-navy-800/70 via-navy-900 to-navy-950 p-6 sm:p-8 lg:flex">
             {/* faint blueprint grid */}
             <div
               className="pointer-events-none absolute inset-0 opacity-[0.05]"
