@@ -42,7 +42,7 @@ export default {
         sans: ['"Hanken Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
-        container: '1240px',
+        container: '1440px',
       },
       borderRadius: {
         '4xl': '2rem',

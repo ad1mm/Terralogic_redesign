@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import SmartImage from './SmartImage.jsx'
-import brands from './brandLogos.js'
-import { Icon } from './iconMap.jsx'
+import ServerRack from './ServerRack.jsx'
 import { IconClose, IconArrowUpRight } from './Icons.jsx'
 
 /**
  * Detail dialog for a single capability. Two-column layout: depth + feature list
- * on the left, an image framed by a faded partner-logo halo on the right.
+ * on the left, an animated server-rack brand motif on the right.
  * Accessible — role="dialog", Escape to close, backdrop click, focus moves to the
  * close button on open, and body scroll is locked while open.
  */
@@ -47,7 +45,6 @@ export default function CapabilityModal({ item, onClose }) {
   }, [item, onClose])
 
   if (!mounted || !current) return null
-  const halo = brands.slice(0, 10)
 
   return (
     <div
@@ -64,7 +61,7 @@ export default function CapabilityModal({ item, onClose }) {
 
       {/* panel */}
       <div
-        className={`relative max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-t-4xl border border-white/10 bg-navy-900 text-paper-soft shadow-lift transition-all duration-300 ease-out sm:rounded-4xl ${
+        className={`modal-scroll relative max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-t-4xl border border-white/10 bg-navy-900 text-paper-soft shadow-lift transition-all duration-300 ease-out sm:rounded-4xl ${
           show ? 'translate-y-0 opacity-100 sm:scale-100' : 'translate-y-6 opacity-0 sm:translate-y-0 sm:scale-95'
         }`}
       >
@@ -80,57 +77,62 @@ export default function CapabilityModal({ item, onClose }) {
 
         <div className="grid gap-0 lg:grid-cols-2">
           {/* Left: depth + features */}
-          <div className="p-7 sm:p-10">
-            <span className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-moss-light">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-moss-light">
-                <Icon name={current.icon} width={22} height={22} />
-              </span>
-              Capability
-            </span>
-
-            <h2 id="capability-modal-title" className="mt-5 font-display text-2xl font-bold leading-tight text-paper-soft sm:text-3xl">
+          <div className="p-6 sm:p-8">
+            <h2 id="capability-modal-title" className="font-display text-2xl font-bold leading-tight text-paper-soft sm:text-[1.7rem]">
               {current.title}
             </h2>
-            <p className="mt-4 leading-relaxed text-paper/70">{current.detail}</p>
+            <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-paper/70">{current.detail}</p>
 
-            <ul className="mt-7 space-y-5">
-              {current.features.map((f, i) => (
-                <li key={f.title} className="border-l-2 border-ember/70 pl-4">
-                  <h3 className="font-display text-base font-bold text-paper-soft">{f.title}</h3>
-                  <p className="mt-1 text-[0.9rem] leading-relaxed text-paper/60">{f.desc}</p>
+            {/* feature timeline */}
+            <ul className="relative mt-6 space-y-4">
+              <span aria-hidden="true" className="absolute left-[5px] top-2 bottom-2 w-px bg-white/15" />
+              {current.features.map((f) => (
+                <li key={f.title} className="relative pl-7">
+                  <span aria-hidden="true" className="absolute left-0 top-1.5 h-[11px] w-[11px] rounded-full bg-ember ring-4 ring-ember/20" />
+                  <h3 className="font-display text-[0.95rem] font-bold text-paper-soft">{f.title}</h3>
+                  <p className="mt-1 text-[0.875rem] leading-snug text-paper/60">{f.desc}</p>
                 </li>
               ))}
             </ul>
 
-            <a href="#contact" onClick={onClose} className="btn-ember mt-8 text-sm">
+            <a href="#contact" onClick={onClose} className="btn-ember mt-7 text-sm">
               Discuss this capability
               <IconArrowUpRight width={16} height={16} />
             </a>
           </div>
 
-          {/* Right: image framed by a faded partner-logo halo */}
-          <div className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-navy-800 to-navy-950 p-8 sm:p-10">
-            {/* faded brand halo */}
-            <div className="pointer-events-none absolute inset-0 grid grid-cols-4 place-items-center gap-2 p-6 opacity-[0.10]" aria-hidden="true">
-              {halo.map((b, i) => (
-                <svg key={i} viewBox="0 0 24 24" className="h-8 w-8 text-white">
-                  <path d={b.path} fill="currentColor" />
-                </svg>
-              ))}
-            </div>
-            {/* glow */}
-            <div className="pointer-events-none absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky/20 blur-3xl" aria-hidden="true" />
+          {/* Right: animated server-rack brand motif + managed-infra stats */}
+          <div className="relative flex flex-col items-center justify-center gap-6 overflow-hidden bg-gradient-to-br from-navy-800/70 via-navy-900 to-navy-950 p-6 sm:p-8">
+            {/* faint blueprint grid */}
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.05]"
+              aria-hidden="true"
+              style={{
+                backgroundImage:
+                  'linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)',
+                backgroundSize: '26px 26px',
+              }}
+            />
+            {/* ambient glows anchoring the rack */}
+            <div className="pointer-events-none absolute left-1/2 top-[40%] h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky/20 blur-3xl" aria-hidden="true" />
+            <div className="pointer-events-none absolute bottom-8 right-6 h-40 w-40 rounded-full bg-ember/15 blur-3xl" aria-hidden="true" />
+            {/* blend the panel into the left column to soften the split */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-navy-900 to-transparent" aria-hidden="true" />
 
-            <div className="relative w-full max-w-sm">
-              <SmartImage
-                id={current.image}
-                alt={current.imageAlt}
-                eager
-                sizes="(max-width: 1024px) 90vw, 40vw"
-                widths={[480, 700, 900]}
-                className="aspect-[4/3] w-full rounded-3xl shadow-lift ring-1 ring-white/10"
-              />
-            </div>
+            <ServerRack className="relative h-64 w-auto drop-shadow-[0_10px_34px_rgba(86,166,218,0.18)] sm:h-72" />
+
+            <ul className="relative grid w-full max-w-xs grid-cols-3 gap-2 text-center">
+              {[
+                { v: '99.98%', l: 'Uptime' },
+                { v: '24/7', l: 'Managed' },
+                { v: 'Tier III', l: 'Grade' },
+              ].map((s) => (
+                <li key={s.l} className="rounded-xl border border-white/10 bg-white/[0.04] px-2 py-3 backdrop-blur-sm">
+                  <span className="block font-display text-lg font-bold text-paper-soft">{s.v}</span>
+                  <span className="mt-0.5 block text-[0.65rem] font-medium uppercase tracking-wider text-paper/50">{s.l}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
